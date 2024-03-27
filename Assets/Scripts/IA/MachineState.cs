@@ -8,10 +8,12 @@ public class MachineState : MonoBehaviour
     public State CurrentState;
     public State []m_States;
     public TypeState stateDefaul;
+
+
     private void Start()
     {
-      
-        m_States = GetComponents<State>();
+       
+          m_States = GetComponents<State>();
         foreach (var item in m_States)
         {
             if (item.type == stateDefaul)

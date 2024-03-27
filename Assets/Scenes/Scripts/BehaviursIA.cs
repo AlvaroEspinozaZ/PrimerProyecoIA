@@ -26,6 +26,11 @@ public class BehaviursIA : MonoBehaviour
 
     [Header("Pursuit")]
     [SerializeField] bool PursuitB;
+
+    private void Awake()
+    {
+       
+    }
     private void Update()
     {
         Seek(SeekB);

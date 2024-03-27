@@ -6,6 +6,7 @@ using UnityEngine;
 public class Jugar : State
 {
     float FrameRate;
+    int id = 0;
     [SerializeField] float[] arrayTime = new float[10];
     [SerializeField] int index = 0;
     void Start()
@@ -30,30 +31,49 @@ public class Jugar : State
     {
         Debug.Log("Estoy jugando");
         FrameRate = 0;
+        _myBehaviursIA.Point = _myPaths.GetPaths(_myPaths.datapaths[0].type)[0];        
+       
+
     }
     public override void Execute()
     {
-        if (FrameRate > arrayTime[index])
+        if (id < _myPaths.GetPaths(_myPaths.datapaths[0].type).Length - 1)
         {
-            FrameRate = 0;
-            index++;
-            if (index == arrayTime.Length)
+            float distanceToCurrent = Vector3.Distance(transform.position, _myPaths.GetPaths(_myPaths.datapaths[0].type)[id].position);
+            Debug.Log(distanceToCurrent);
+            if (distanceToCurrent < 0.5f)
             {
-                RandeArray();
-                index = index % arrayTime.Length;
+                id++;
+                _myBehaviursIA.Point = _myPaths.GetPaths(_myPaths.datapaths[0].type)[id];
             }
-            _energy.energy= Mathf.Clamp(_energy.energy-UnityEngine.Random.Range(4, 10),0,100);
-                if(_energy.energy==0)
-                m_MachineState.NextState(TypeState.Dormir);
-            _energy.hungry = Mathf.Clamp(_energy.hungry - UnityEngine.Random.Range(4, 10), 0, 100);
+        }
+
+
+        if (id>= _myPaths.GetPaths(_myPaths.datapaths[0].type).Length - 1)
+        {
+            if (FrameRate > arrayTime[index])
+            {
+                FrameRate = 0;
+                index++;
+                if (index == arrayTime.Length)
+                {
+                    RandeArray();
+                    index = index % arrayTime.Length;
+                }
+                _energy.energy = Mathf.Clamp(_energy.energy - UnityEngine.Random.Range(6, 16), 0, 100);
+                if (_energy.energy == 0)
+                    m_MachineState.NextState(TypeState.Dormir);
+                _energy.hungry = Mathf.Clamp(_energy.hungry - UnityEngine.Random.Range(6, 16), 0, 100);
                 if (_energy.hungry == 0)
-                 m_MachineState.NextState(TypeState.Comer);
+                    m_MachineState.NextState(TypeState.Comer);
 
                 if (_energy.WC == 100)
-                m_MachineState.NextState(TypeState.Banno);
-            //return;
+                    m_MachineState.NextState(TypeState.Banno);
+                //return;
+            }
+            FrameRate += Time.deltaTime;
         }
-        FrameRate += Time.deltaTime;
+       
     }
 
     void Update()

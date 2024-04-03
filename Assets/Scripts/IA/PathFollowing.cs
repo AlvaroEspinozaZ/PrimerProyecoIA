@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TypePath { Comer, Jugar, WC, Dormir }
+public enum TypePath { Comer, Jugar, Banno, Dormir }
 
 [System.Serializable]
 public class DataPath
@@ -16,6 +16,7 @@ public class DataPath
 
 public class PathFollowing : MonoBehaviour
 {
+    public TypePath type;
     public List<DataPath> datapaths = new List<DataPath>();
 
     Dictionary<TypePath, Transform[]> dictPath = new Dictionary<TypePath, Transform[]>();
@@ -24,7 +25,7 @@ public class PathFollowing : MonoBehaviour
     public float gizmoRadius = 1.0f;
     public Color[] gizmoColor = new Color[] { Color.red, Color.green, Color.blue, Color.yellow };
     public Color[] LineColor = new Color[] { Color.red, Color.green, Color.blue, Color.yellow };
-    void Start()
+    void Awake()
     {
         foreach (var path in datapaths)
         {

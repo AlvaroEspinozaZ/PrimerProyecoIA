@@ -31,25 +31,25 @@ public class Jugar : State
     {
         Debug.Log("Estoy jugando");
         FrameRate = 0;
-        _myBehaviursIA.Point = _myPaths.GetPaths(_myPaths.datapaths[0].type)[0];        
+        _myBehaviursIA.Point = _myPaths.GetPaths(TypePath.Jugar)[0];        
        
 
     }
     public override void Execute()
     {
-        if (id < _myPaths.GetPaths(_myPaths.datapaths[0].type).Length - 1)
+        if (id < _myPaths.GetPaths(TypePath.Jugar).Length - 1)
         {
-            float distanceToCurrent = Vector3.Distance(transform.position, _myPaths.GetPaths(_myPaths.datapaths[0].type)[id].position);
+            float distanceToCurrent = Vector3.Distance(transform.position, _myPaths.GetPaths(TypePath.Jugar)[id].position);
             Debug.Log(distanceToCurrent);
             if (distanceToCurrent < 0.5f)
             {
                 id++;
-                _myBehaviursIA.Point = _myPaths.GetPaths(_myPaths.datapaths[0].type)[id];
+                _myBehaviursIA.Point = _myPaths.GetPaths(TypePath.Jugar)[id];
             }
         }
 
 
-        if (id>= _myPaths.GetPaths(_myPaths.datapaths[0].type).Length - 1)
+        if (id>= _myPaths.GetPaths(TypePath.Jugar).Length - 1)
         {
             if (FrameRate > arrayTime[index])
             {

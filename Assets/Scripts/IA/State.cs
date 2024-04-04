@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum TypeState { Comer,Jugar,Banno,Dormir}
+public enum TypeState { Comer,Jugar,Banno,Dormir,Moverse}
 public class State : MonoBehaviour
 {
     public TypeState type;
@@ -29,5 +29,5 @@ public class State : MonoBehaviour
     public virtual void Exit()
     {
 
-    }
+    } 
 }

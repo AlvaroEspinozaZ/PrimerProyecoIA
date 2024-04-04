@@ -6,7 +6,7 @@ using UnityEngine;
 public class Jugar : State
 {
     float FrameRate;
-    int id = 0;
+
     [SerializeField] float[] arrayTime = new float[10];
     [SerializeField] int index = 0;
     void Start()
@@ -37,21 +37,7 @@ public class Jugar : State
     }
     public override void Execute()
     {
-        if (id < _myPaths.GetPaths(TypePath.Jugar).Length - 1)
-        {
-            float distanceToCurrent = Vector3.Distance(transform.position, _myPaths.GetPaths(TypePath.Jugar)[id].position);
-            Debug.Log(distanceToCurrent);
-            if (distanceToCurrent < 0.5f)
-            {
-                id++;
-                _myBehaviursIA.Point = _myPaths.GetPaths(TypePath.Jugar)[id];
-            }
-        }
-
-
-        if (id>= _myPaths.GetPaths(TypePath.Jugar).Length - 1)
-        {
-            if (FrameRate > arrayTime[index])
+        if (FrameRate > arrayTime[index])
             {
                 FrameRate = 0;
                 index++;
@@ -72,8 +58,6 @@ public class Jugar : State
                 //return;
             }
             FrameRate += Time.deltaTime;
-        }
-       
     }
 
     void Update()

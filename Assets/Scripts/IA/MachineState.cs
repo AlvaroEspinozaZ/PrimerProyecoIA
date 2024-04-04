@@ -8,7 +8,7 @@ public class MachineState : MonoBehaviour
     public State CurrentState;
     public State []m_States;
     public TypeState stateDefaul;
-
+    public TypePath nextpath;
 
     private void Start()
     {
@@ -46,10 +46,29 @@ public class MachineState : MonoBehaviour
                     CurrentState = item;
                     CurrentState.enabled=true;
                     CurrentState.Enter();
+                }                   
+            }            
+        }
+    }
+
+    public void NextState(TypeState state,TypePath path)
+    {
+        foreach (var item in m_States)
+        {
+            if (item.type == state)
+            {
+                if (CurrentState != null)
+                {
+                    CurrentState.Exit();
+                    CurrentState.enabled = false;
+
+                    CurrentState = item;
+                    CurrentState.enabled = true;
+                    CurrentState.Enter();
                 }
-                   
             }
-            
+
+            nextpath = path;
         }
     }
     public void DesactiveStateAll()

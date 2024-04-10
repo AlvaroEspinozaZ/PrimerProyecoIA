@@ -47,7 +47,7 @@ public class Banno : State
             
             _energy.WC = Mathf.Clamp(_energy.WC - UnityEngine.Random.Range(5, 16), 0, 100);
             if (_energy.WC == 0)
-                m_MachineState.NextState(TypeState.Jugar);
+                m_MachineState.NextState(TypeState.Moverse, TypePath.Jugar);
 
         }
         FrameRate += Time.deltaTime;

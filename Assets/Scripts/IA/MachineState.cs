@@ -53,21 +53,23 @@ public class MachineState : MonoBehaviour
 
     public void NextState(TypeState state,TypePath path)
     {
+        //Debug.Log("Estoy entrando al NExSTATE");
         foreach (var item in m_States)
         {
+            //Debug.Log("Estoy ubicando el state "+ state);
             if (item.type == state)
             {
+                //Debug.Log("Encontre " + state);
                 if (CurrentState != null)
                 {
                     CurrentState.Exit();
                     CurrentState.enabled = false;
-
+                    //Debug.Log("Apago " + CurrentState);
                     CurrentState = item;
                     CurrentState.enabled = true;
                     CurrentState.Enter();
                 }
             }
-
             nextpath = path;
         }
     }

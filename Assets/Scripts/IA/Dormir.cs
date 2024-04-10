@@ -46,10 +46,10 @@ public class Dormir : State
             }
             _energy.energy = Mathf.Clamp(_energy.energy + UnityEngine.Random.Range(6, 15), 0, 100);
             if (_energy.energy == 100)
-                m_MachineState.NextState(TypeState.Jugar);
+                m_MachineState.NextState(TypeState.Moverse, TypePath.Jugar);
             _energy.hungry = Mathf.Clamp(_energy.hungry - UnityEngine.Random.Range(0, 3), 0, 100);
             if (_energy.energy == 0)
-                m_MachineState.NextState(TypeState.Jugar);
+                m_MachineState.NextState(TypeState.Moverse, TypePath.Jugar);
 
         }
         FrameRate += Time.deltaTime;

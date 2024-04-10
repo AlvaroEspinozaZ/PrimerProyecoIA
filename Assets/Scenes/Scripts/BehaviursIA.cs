@@ -44,42 +44,48 @@ public class BehaviursIA : MonoBehaviour
     {
         if (SeekB)
         {
-            Vector3 direction = (Point.position - transform.position).normalized;
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction.normalized), Time.deltaTime * velocity);
-            transform.position += transform.forward * Time.deltaTime * velocity;
-   
+            if (Point != null)
+            {
+                Vector3 direction = (Point.position - transform.position).normalized;
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction.normalized), Time.deltaTime * velocity);
+                transform.position += transform.forward * Time.deltaTime * velocity;
+            }
         }
     }
     void Arrive(bool ArriveB)
     {
         if (ArriveB)
-        {   
-            // Calcula la dirección hacia el objetivo
-            Vector3 targetDirection = Point.position - transform.position;
-
-            // Calcula la distancia al objetivo
-            float distance = targetDirection.magnitude;
-
-            // Calcula la velocidad deseada
-            float desiredSpeed = velocity;
-
-            // Si estamos dentro de la distancia de frenado, ajusta la velocidad
-            if (distance < slowingDistance)
+        {
+            if (Point != null)
             {
-                desiredSpeed = velocity * (distance / slowingDistance);
+                // Calcula la dirección hacia el objetivo
+                Vector3 targetDirection = Point.position - transform.position;
+
+                // Calcula la distancia al objetivo
+                float distance = targetDirection.magnitude;
+
+                // Calcula la velocidad deseada
+                float desiredSpeed = velocity;
+
+                // Si estamos dentro de la distancia de frenado, ajusta la velocidad
+                if (distance < slowingDistance)
+                {
+                    desiredSpeed = velocity * (distance / slowingDistance);
+                }
+
+                // Si estamos dentro de la distancia de parada, detén completamente
+                if (distance < stoppingDistance)
+                {
+                    desiredSpeed = 0f;
+                }
+
+
+                // Calcula la fuerza de dirección hacia la velocidad deseada
+                transform.rotation = Quaternion.LookRotation(targetDirection.normalized);
+
+                transform.position += transform.forward * Time.deltaTime * desiredSpeed;
             }
-
-            // Si estamos dentro de la distancia de parada, detén completamente
-            if (distance < stoppingDistance)
-            {
-                desiredSpeed = 0f;
-            }
-
-
-            // Calcula la fuerza de dirección hacia la velocidad deseada
-            transform.rotation = Quaternion.LookRotation(targetDirection.normalized);
-
-            transform.position += transform.forward * Time.deltaTime * desiredSpeed;
+            
         }
         
     }

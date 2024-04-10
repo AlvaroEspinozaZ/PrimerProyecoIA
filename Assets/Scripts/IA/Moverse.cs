@@ -8,12 +8,17 @@ public class Moverse : State
     [SerializeField] float[] arrayTime = new float[10];
     [SerializeField] int index = 0;
     int id = 0;
-   
+
+    private void Awake()
+    {
+        LoadComponent();
+
+    }
     void Start()
     {
         RandeArray();
-        LoadComponent();
-        _mypath.type = m_MachineState.nextpath;
+        
+        _mypath.type = m_MachineState.nextpath;     
     }
     void RandeArray()
     {
@@ -48,36 +53,49 @@ public class Moverse : State
                 RandeArray();
                 index = index % arrayTime.Length;
             }
-            if (id < _myPaths.GetPaths(m_MachineState.nextpath).Length - 1)
-            {
-                float distanceToCurrent = Vector3.Distance(transform.position, _myPaths.GetPaths(m_MachineState.nextpath)[id].position);
-                
-                Debug.Log(distanceToCurrent);
-                if (distanceToCurrent < 0.5f)
-                {
-                    id++;
-                    _myBehaviursIA.Point = _myPaths.GetPaths(m_MachineState.nextpath)[id];
-                }
+
+            if (_myVisionSensor.juguete != null && _myVisionSensor.juguete.activeInHierarchy)
+            {               
+                _myBehaviursIA.Point = _myVisionSensor.juguete.transform;
             }
-            float lastDistanceToCurrent = Vector3.Distance(transform.position, _myPaths.GetPaths(m_MachineState.nextpath)[_myPaths.GetPaths(m_MachineState.nextpath).Length - 1].position);
-            if (lastDistanceToCurrent < 0.5f)
+            else
             {
-                switch (m_MachineState.nextpath)
+                if (id < _myPaths.GetPaths(m_MachineState.nextpath).Length - 1)
                 {
-                    case TypePath.Comer:
-                        m_MachineState.NextState(TypeState.Comer);
-                        break;
-                    case TypePath.Dormir:
-                        m_MachineState.NextState(TypeState.Dormir);
-                        break;
-                    case TypePath.Jugar:
-                        m_MachineState.NextState(TypeState.Jugar);
-                        break;
-                    case TypePath.Banno:
-                        m_MachineState.NextState(TypeState.Banno);
-                        break;
+                    if(_myBehaviursIA.Point  = _myVisionSensor.juguete.transform)
+                    {
+                        _myBehaviursIA.Point = _myPaths.GetPaths(m_MachineState.nextpath)[0];
+                    }                    
+                    float distanceToCurrent = Vector3.Distance(transform.position, _myPaths.GetPaths(m_MachineState.nextpath)[id].position);
+
+                    Debug.Log(distanceToCurrent);
+                    if (distanceToCurrent < 0.5f)
+                    {
+                        id++;
+                        _myBehaviursIA.Point = _myPaths.GetPaths(m_MachineState.nextpath)[id];
+                    }
                 }
-            }            
+                float lastDistanceToCurrent = Vector3.Distance(transform.position, _myPaths.GetPaths(m_MachineState.nextpath)[_myPaths.GetPaths(m_MachineState.nextpath).Length - 1].position);
+                if (lastDistanceToCurrent < 0.5f)
+                {
+                    switch (m_MachineState.nextpath)
+                    {
+                        case TypePath.Comer:
+                            m_MachineState.NextState(TypeState.Comer);
+                            break;
+                        case TypePath.Dormir:
+                            m_MachineState.NextState(TypeState.Dormir);
+                            break;
+                        case TypePath.Jugar:
+                            m_MachineState.NextState(TypeState.Jugar);
+                            break;
+                        case TypePath.Banno:
+                            m_MachineState.NextState(TypeState.Banno);
+                            break;
+                    }
+                }
+            }   
+                 
         }
             FrameRate += Time.deltaTime;
     }

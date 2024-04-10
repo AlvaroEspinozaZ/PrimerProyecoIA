@@ -37,7 +37,7 @@ public class PathFollowing : MonoBehaviour
 
             foreach (Transform t in elemt.paths)
             {
-                Debug.Log("Key:" + elemt.type + " -> Value: " + t.position);
+               // Debug.Log("Key:" + elemt.type + " -> Value: " + t.position);
 
             }
         }

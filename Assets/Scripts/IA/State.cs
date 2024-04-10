@@ -10,12 +10,14 @@ public class State : MonoBehaviour
     public PathFollowing _myPaths;
     public BehaviursIA _myBehaviursIA;
     public PathFollowing _mypath;
+    public VisionSensor _myVisionSensor;
     public virtual void LoadComponent()
     {
         _energy = GetComponent<Energy>();
         m_MachineState = GetComponent<MachineState>();
         _myPaths = GetComponent<PathFollowing>();
         _myBehaviursIA = GetComponent<BehaviursIA>();
+        _myVisionSensor = GetComponent<VisionSensor>();
         _mypath = GetComponent<PathFollowing>();
     }
     public virtual void Enter( )

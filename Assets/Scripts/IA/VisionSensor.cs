@@ -181,6 +181,7 @@ public class VisionSensor : MonoBehaviour
     [Space(20)]
     [Header("Scan Layer Mask")]
     public LayerMask ScanLayerMask; // Capa de los objetos a detectar
+    public GameObject juguete;
     [Space(20)]
     [Header("Frame Rate")]
     #region Rate
@@ -239,9 +240,14 @@ public class VisionSensor : MonoBehaviour
             if(targetsInViewRadius[i]!= mycollider)
             {
                 Energy health = targetsInViewRadius[i].GetComponent<Energy>();
+                 juguete = targetsInViewRadius[i].gameObject;
                 if (health != null && MainVision.IsInSight(health.AimOffset) && health != MainVision.Owner)
                 {
                     EnemyView = health;
+                }
+                if (juguete != null && MainVision.IsInSight(juguete.transform) && juguete != MainVision.Owner && juguete.gameObject.tag == "Juguete")
+                {                    
+                    Debug.Log("vi un juguete1111");                    
                 }
             }
                     

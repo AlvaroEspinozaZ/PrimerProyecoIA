@@ -31,6 +31,11 @@ public class AICharacterVehicle : AICharacterControl
     public virtual void MoveToAllied()
     {
     }
+    public virtual void MoveToObject()
+    {
+
+    }
+
     public virtual void MoveToEnemy()
     {
     }

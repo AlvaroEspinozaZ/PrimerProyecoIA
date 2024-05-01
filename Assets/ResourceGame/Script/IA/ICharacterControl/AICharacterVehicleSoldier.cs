@@ -12,6 +12,4 @@ public class AICharacterVehicleSoldier : AICharacterVehicleLand
     {
         base.LoadComponent();
     }
-
-
 }

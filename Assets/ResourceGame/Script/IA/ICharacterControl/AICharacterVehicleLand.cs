@@ -32,5 +32,13 @@ public class AICharacterVehicleLand : AICharacterVehicle
             MoveToPosition(_AIEye.ViewEnemy.transform.position);
         }
     }
+    public override void MoveToObject()
+    {
+        if (_AIEye.ViewToy != null)
+        {
+            MoveToPosition(_AIEye.ViewToy.transform.position);
+        }
+    }
+
     #endregion
 }

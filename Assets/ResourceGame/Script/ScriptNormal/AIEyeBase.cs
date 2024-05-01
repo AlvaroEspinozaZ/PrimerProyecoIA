@@ -6,6 +6,7 @@ public class AIEyeBase : MonoBehaviour
 {
     public Health ViewEnemy;
     public Health ViewAllied;
+    public Health ViewToy;
     void Start()
     {
         

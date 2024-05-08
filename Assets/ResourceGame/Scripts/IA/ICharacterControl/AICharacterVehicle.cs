@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AICharacterVehicle : AICharacterControl
 {
@@ -9,7 +10,12 @@ public class AICharacterVehicle : AICharacterControl
         base.LoadComponent();
 
     }
+    #region Move
 
+    public virtual void MoveToPosition(Vector3 position)
+    {
+       
+    }
     public virtual void MoveToPositionEvade()
     {
 
@@ -22,23 +28,17 @@ public class AICharacterVehicle : AICharacterControl
     {
 
     }
-    public virtual void MoveToAlied()
-    {
-
-    }
     public virtual void MoveToAllied()
     {
+    }
+    public virtual void MoveToObject()
+    {
 
     }
+
     public virtual void MoveToEnemy()
     {
-
     }
-
-    ///////////////////////
-    public virtual void MoveToPosition(Vector3 target)
-    {
-
-    }
+    #endregion
 
 }

@@ -5,22 +5,40 @@ using UnityEngine.AI;
 public class AICharacterVehicleLand : AICharacterVehicle
 {
     protected NavMeshAgent agent;
+
     public override void LoadComponent()
     {
+        agent = GetComponent<NavMeshAgent>();
         base.LoadComponent();
     }
+
+    #region Move
     public override void MoveToPosition(Vector3 position)
     {
         agent.SetDestination(position);
-        if (this.agent.remainingDistance > this.agent.stoppingDistance)
+        
+    }
+    public override void MoveToAllied()
+    {
+        if (_AIEye.ViewAllied != null)
         {
-            (this.character).Move(this.agent.desiredVelocity);
+            MoveToPosition(_AIEye.ViewAllied.transform.position);
         }
-        else
+    }
+    public override void MoveToEnemy()
+    {
+        if (_AIEye.ViewEnemy != null)
         {
-            (this.character).Move(Vector3.zero);
+            MoveToPosition(_AIEye.ViewEnemy.transform.position);
+        }
+    }
+    public override void MoveToObject()
+    {
+        if (_AIEye.ViewToy != null)
+        {
+            MoveToPosition(_AIEye.ViewToy.transform.position);
         }
     }
 
-
+    #endregion
 }

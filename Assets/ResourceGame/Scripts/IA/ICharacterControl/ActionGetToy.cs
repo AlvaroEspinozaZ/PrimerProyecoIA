@@ -11,7 +11,7 @@ public class ActionGetToy : ActionNodeVehicle
     }
     public override TaskStatus OnUpdate()
     {
-        if (_AICharacterVehicle.Health.IsDead)
+        if (aICharacterVehicle.Health.IsDead)
             return TaskStatus.Failure;
         SwitchMoveToToy();
         return TaskStatus.Success;
@@ -23,9 +23,9 @@ public class ActionGetToy : ActionNodeVehicle
         switch (Unit)
         {
             case TypeUnit.Soldier:
-                if (_AICharacterVehicle is AICharacterVehicleSoldier)
+                if (aICharacterVehicle is AICharacterVehicleSoldier)
                 {
-                    ((AICharacterVehicleSoldier)_AICharacterVehicle).MoveToObject();
+                    ((AICharacterVehicleSoldier)aICharacterVehicle).MoveToObject();
                 }
                 break;
             case TypeUnit.None:

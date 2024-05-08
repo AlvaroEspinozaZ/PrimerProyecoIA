@@ -12,7 +12,7 @@ public class ActionFollowEnemy : ActionNodeVehicle
     }
     public override TaskStatus OnUpdate()
     {
-        if (_AICharacterVehicle.Health.IsDead)
+        if (aICharacterVehicle.Health.IsDead)
             return TaskStatus.Failure;
         SwitchMoveToEnemy();
         return TaskStatus.Success;
@@ -23,9 +23,9 @@ public class ActionFollowEnemy : ActionNodeVehicle
         switch (Unit)
         {
             case TypeUnit.Soldier:
-                if (_AICharacterVehicle is AICharacterVehicleSoldier)
+                if (aICharacterVehicle is AICharacterVehicleSoldier)
                 {
-                    ((AICharacterVehicleSoldier)_AICharacterVehicle).MoveToEnemy();
+                    ((AICharacterVehicleSoldier)aICharacterVehicle).MoveToEnemy();
                 }
                 break;
             case TypeUnit.None:

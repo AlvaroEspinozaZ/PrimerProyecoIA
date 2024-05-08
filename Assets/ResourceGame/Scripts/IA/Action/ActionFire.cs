@@ -22,7 +22,7 @@ public class ActionFire : ActionNodeActions
     {
         switch (Unit)
         {
-            case TypeUnit.Policia:
+            case TypeUnit.Soldier:
                 //if(aICharacterAction is ait)
                 break;
             case TypeUnit.Zombie:
